@@ -266,18 +266,6 @@ window.$message = function(options = {}) {
 	}, options)
 	return new Message(options)
 }
-this.$message("info")
-let elMessageCancle = document.querySelectorAll(".el-message-cancle");
-for (let i = 0; i < elMessageCancle.length; i++) {
-	elMessageCancle[i].onclick = () => {
-		// console.log(this.$notify)
-		this.$notify({
-			message: "已取消",
-			type: "error",
-			duration: 3000
-		})
-	}
-}
 window.$notify = function(options = {}) {
 	// 可以只传入message的值（字符串）
 	if (typeof options === "string") {
@@ -297,5 +285,18 @@ window.$notify = function(options = {}) {
 		},
 		space: 70
 	}, options)
-	return new Info(options)
+	return new Notify(options)
+}
+
+//this.$message("info")
+let elMessageCancle = document.querySelectorAll(".el-message-cancle");
+for (let i = 0; i < elMessageCancle.length; i++) {
+	elMessageCancle[i].onclick = () => {
+		// console.log(this.$notify)
+		this.$notify({
+			message: "已取消",
+			type: "error",
+			duration: 3000
+		})
+	}
 }
