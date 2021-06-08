@@ -295,7 +295,7 @@ for (let i = 0; i < elMessageCancle.length; i++) {
 		// console.log(this.$notify)
 		this.$notify({
 			message: "已取消",
-			type: "error",
+			type: "info",
 			duration: 3000
 		})
 	}
