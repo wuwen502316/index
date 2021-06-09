@@ -4,136 +4,6 @@ let icon = {
 	warning: `<svg t="1623131041816" class="icon" viewBox="0 0 1024 1024" version="1.1" p-id="3120" width="1em" height="1em"><path d="M467.2 748.8A44.8 44.8 0 1 0 512 704a44.8 44.8 0 0 0-44.8 44.8zM512 640a40.106667 40.106667 0 0 1-40.106667-40.106667V230.826667a40.106667 40.106667 0 0 1 80.213334 0v369.066666A40.106667 40.106667 0 0 1 512 640z m0-640a512 512 0 1 0 512 512A512 512 0 0 0 512 0z m0 72.106667a439.893333 439.893333 0 0 1 170.666667 845.226666A439.893333 439.893333 0 0 1 200.96 200.96a439.04 439.04 0 0 1 311.04-128z" fill="#5E5C5C" p-id="3121"></path></svg>`,
 	error: `<svg t="1623131169870" class="icon" viewBox="0 0 1024 1024" version="1.1" p-id="4976" width="1em" height="1em"><path d="M512 0C229.376 0 0 229.376 0 512s229.376 512 512 512 512-229.376 512-512S794.624 0 512 0z m218.624 672.256c15.872 15.872 15.872 41.984 0 57.856-8.192 8.192-18.432 11.776-29.184 11.776s-20.992-4.096-29.184-11.776L512 569.856l-160.256 160.256c-8.192 8.192-18.432 11.776-29.184 11.776s-20.992-4.096-29.184-11.776c-15.872-15.872-15.872-41.984 0-57.856L454.144 512 293.376 351.744c-15.872-15.872-15.872-41.984 0-57.856 15.872-15.872 41.984-15.872 57.856 0L512 454.144l160.256-160.256c15.872-15.872 41.984-15.872 57.856 0 15.872 15.872 15.872 41.984 0 57.856L569.856 512l160.768 160.256z" fill="#CF3736" p-id="4977"></path></svg>`
 }
-class Info {
-	constructor(options) {
-		for (let k in options) {
-			if (!options.hasOwnProperty(k)) {
-				break;
-			}
-			this[k] = options[k];
-			// console.log(!options.hasOwnProperty(k))
-		}
-		this.className = null;
-		this.messageBox = null;
-		this.icon = icon[this.type];
-		this.init();
-	}
-	init() {
-		this.init_data();
-	}
-	init_data() {
-		// console.log(this.message)
-		if(this.title){
-			if (this.type) {
-				this.className = `el-notification right`;
-				if (this.is_center) {
-					this.className = `el-notification right is-center`;
-				}
-			}
-		}else{
-			if (this.type) {
-				this.className = `el-message el-message--${this.type}`;
-				if (this.is_center) {
-					this.className = `el-message el-message--${this.type} is-center`;
-				}
-			}
-		}
-		console.log(this.type)
-		this.create_element();
-	}
-	create_element() {
-		this.messageBox = document.createElement("div");
-		this.messageBox.className = this.className;
-		this.messageBox.role = "alert";
-		let s = `
-			<i style = "margin-right: 5px">${this.icon}</i>
-			<div class="el-notification__group">
-				<h2 class="el-notification__title">
-					<font style="vertical-align: inherit;">
-						<font style="vertical-align: inherit;">成功</font>
-					</font>
-				</h2>
-				<div class="el-notification__content">
-					<p>
-						<font style="vertical-align: inherit;">
-							<font style="vertical-align: inherit;">这是一条成功的提示消息</font>
-						</font>
-					</p>
-				</div>
-				<!--<div class="el-notification__closeBtn"> X </div> -->
-			</div>`
-		let _str = `
-			<i style = "margin-right: 5px">${this.icon}</i>
-			<p class="el-message__content">
-				<font style="vertical-align: inherit;">
-					<font style="vertical-align: inherit;">${this.message}</font>
-				</font>
-			</p>
-			<!---->`
-		this.messageBox.innerHTML = s;
-		document.querySelector("body").appendChild(this.messageBox);
-		console.log("创建完成");
-
-		this.setInfoStyleTop(); //设置mwssagebox的top
-		this.setTimer(); //设置定时器，3s后消失，同时后面的messagebox同步上升
-	}
-	setInfoStyleTop() {
-		const str = `.el-message--${this.type}`;
-		let messageBoxs = document.querySelectorAll(str);
-		let message_len = messageBoxs.length;
-		this.messageBox.style.top = `${message_len === 1 ? this.style.top : (message_len-1)*this.space + this.style.top}px`;
-	}
-	setTimer() {
-		let timer = setTimeout(() => {
-			this.remove_messagebox(); //赋值className开启动画，并监听transitionend是否完成
-			this.setAllMessageBoxStyle();
-		}, this.duration)
-		console.log("定时器开启")
-	}
-	remove_messagebox() {
-		// let all_message_info = document.querySelectorAll(".el-message--info");
-		let message_box = this.messageBox;
-		message_box.style.top = parseFloat(getComputedStyle(this.messageBox).top) - this.space + "px";
-		message_box.style.opacity = 0;
-		// this.setAllMessageBoxStyle();//设置后面的messagebox同步上升
-		let remove_ele = () => { //回调函数执行后删除元素
-			document.querySelector("body").removeChild(this.messageBox);
-			console.log("已移除");
-		}
-		this.eventListener(remove_ele);
-	}
-	eventListener(cb) {
-		let flag = false;
-		this.messageBox.addEventListener("transitionend", (e) => {
-			if (e.target === this.messageBox && !flag) {
-				flag = true;
-				cb();
-			}
-		})
-	}
-	setAllMessageBoxStyle() {
-		const str = `.el-message--${this.type}`;
-		let messageBoxs = document.querySelectorAll(str);
-		let startlen = messageBoxs.length;
-		// console.log(len);
-		for (let i = 1; i < startlen; i++) {
-			messageBoxs[i].classList.add("el-mssage-info-step-move");
-			messageBoxs[i].style.top = parseFloat(getComputedStyle(messageBoxs[i]).top) - this.space + "px";
-		}
-		let t = setTimeout(() => {
-			const str = `.el-message--${this.type}`;
-			let messageBoxs_end = document.querySelectorAll(str);
-			let endlen = messageBoxs_end.length;
-			for (let i = 0; i < startlen; i++) {
-				if (messageBoxs_end[i] !== undefined) {
-					console.log("同步上移完成");
-					messageBoxs_end[i].classList.remove("el-mssage-info-step-move");
-				}
-			}
-			clearTimeout(t);
-		}, 300)
-	}
-}
 class Notify {
 	constructor(options) {
 		for (let k in options) {
@@ -238,34 +108,6 @@ class Notify {
 		}, 300)
 	}
 }
-class Message extends Notify {
-	constructor(options) {
-		super(options);
-		console.log(this.init);
-		// this.init();
-	}
-}
-window.$message = function(options = {}) {
-	// 可以只传入message的值（字符串）
-	if (typeof options === "string") {
-		options = {
-			message: options
-		}
-	}
-	options = Object.assign({
-		state: "message",
-		type: "info",
-		message: "默认信息",
-		duration: 3000,
-		is_center: false,
-		is_show_close: false,
-		style: {
-			top: 20
-		},
-		space: 70
-	}, options)
-	return new Message(options)
-}
 window.$notify = function(options = {}) {
 	// 可以只传入message的值（字符串）
 	if (typeof options === "string") {
@@ -287,8 +129,6 @@ window.$notify = function(options = {}) {
 	}, options)
 	return new Notify(options)
 }
-
-//this.$message("info")
 let elMessageCancle = document.querySelectorAll(".el-message-cancle");
 for (let i = 0; i < elMessageCancle.length; i++) {
 	elMessageCancle[i].onclick = () => {
