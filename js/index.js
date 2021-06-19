@@ -1,8 +1,21 @@
 // let flag = true;
 window.onload = function(){
 	// console.log(window === this);
-	
+	window.is_show_close = true;
 	let elMessageCancle = document.querySelectorAll(".el-message-cancle");
+	let elBtnChange = document.querySelector(".el-btn-change");
+	let elBtnChangeSpan = document.querySelector(".el-btn-change>span");
+	let showCloseDiv = document.querySelector(".is-showClose");
+	let showCloseSpan = document.querySelector(".is-showClose>span");
+	elBtnChange.onclick = ()=>{
+		const inner = elBtnChangeSpan.innerHTML;
+		elBtnChangeSpan.innerHTML = inner && inner === "message" ? "notify" : "message";
+	}
+	showCloseDiv.onclick = ()=>{
+		const inner = showCloseSpan.innerHTML;
+		showCloseSpan.innerHTML = inner && inner === "可关闭" ? "不可关闭" : "可关闭";
+		this.is_show_close = !this.is_show_close;
+	}
 	(function btnClick(){
 		let btn_types = document.querySelectorAll(".btn_type");
 		for (let i = 0; i < btn_types.length; i++) {
@@ -19,14 +32,26 @@ window.onload = function(){
 						type = e.target.getAttribute("rtype");
 						message = e.target.children[0].innerHTML;
 					}
-					this.$message({
-						type:type,
-						message: message
-					})
+					
+					if(elBtnChangeSpan.innerHTML == "message"){
+						this.$message({
+							type:type,
+							message: message,
+							is_show_close:window.is_show_close
+						})
+					}else{
+						this.$notify({
+							type:type,
+							title:"title",
+							message: message,
+							is_show_close:window.is_show_close
+						})
+					}
+					
 				}
 			}
 		}
-	})()
+	}())
 	for (let i = 0; i < elMessageCancle.length; i++) {
 		elMessageCancle[i].onclick = () => {
 			// console.log(this.$notify)
@@ -34,23 +59,14 @@ window.onload = function(){
 			if(el_message_box_wapper && el_message_box_wapper.length <= 1){
 				document.querySelector("body").removeChild(el_message_box_wapper[0]);
 			}
-			this.$notify({
+			this.$message({
 				message: "已取消",
 				type: "error",
 				duration: 3000
 			})
 		}
 	}
-	let str = `<div role="alert" class="el-notification right" style="top: 16px; z-index: 2011;">
-		<!-- <i class="el-notification__icon el-icon-success"></i> -->
-		<div class="el-notification__group is-with-icon">
-			<h2 class="el-notification__title">成功</h2>
-			<div class="el-notification__content">
-				<p>这是一条成功的提示消息</p>
-			</div>
-			<div class="el-notification__closeBtn el-icon-close"></div>
-		</div>
-	</div>`
+	
 }
 
 
