@@ -8,13 +8,16 @@
      + 需求
      + 实现原理
 
-##前言##
+## 前言 ##
+
 样式是从element-ui官网down下来的(elementUI的css部分),样式和一些动画来自elementUI,对于icon部分使用了svg矢量，对css文件做了初步分类，对于css的详细分类持续更新中...
 ----
+
  **需求**:通过class类实现类似于*this.$message*或者*this.$notify*弹出框
+ 
  首先对function初始化，并return class实例；后挂载到window对象上
  
-${`const _message = function(options = {}) {
+$<`const _message = function(options = {}) {
           // 可以只传入message的值（字符串）
           if (typeof options === "string") {
                options = {
@@ -36,12 +39,12 @@ ${`const _message = function(options = {}) {
           }, options)
           return new Message(options)
      }
-     window.message = _message;`}
+     window.message = _message;`>
      
 
 >1、createELement（$message)
      1.1、首先createELement("div")，div内添加如下代码，后添加到body中
-     ${`
+     $<`
      this.HTMLCODE = `<i style = "margin-right: 5px">${this.icon}</i>//icon为图标
      <p class="el-message__content">
           <font style="vertical-align: inherit;">
@@ -50,7 +53,7 @@ ${`const _message = function(options = {}) {
      </p>
      ${this.is_show_close?`<i class="el-message__closeBtn">${icon.close}</i>`:`<!---->`}
      `;
-     `}
+     `>
      1.2、设置messagebox的top(获取所有的el-message*as*this.messageBoxs，通过判断this.messageBoxs.length决定top值)
      1.3、判断**duration<=0**,决定是否开启一个定时器,3s后（默认)移除this.message，若duration<=0为不会自动关闭的弹框
      `if(this.duration){
