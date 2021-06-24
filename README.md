@@ -15,13 +15,12 @@
 ## 简介 ##
 
 样式是从element-ui官网down下来的(elementUI的css部分),样式和一些动画来自elementUI,对于icon部分使用了svg矢量，对css文件做了初步分类，对于css的详细分类持续更新中...
-----
 
-## 需求 
+## 需求 ##
 
-> **通过class类实现类似于*this.$message*或者*this.$notify*弹出框
+ ##### 通过class类实现类似于  this.\$message 或者 this.\$notify  弹出框 #####
  
- ### 首先对function初始化，并return class实例；后挂载到window对象上
+ ##### 首先对function初始化，并return class实例；后挂载到window对象上 #####
  
 ```js
 const _message = function(options = {}) {
@@ -47,10 +46,11 @@ const _message = function(options = {}) {
   return new Message(options)
 }
 window.message = _message;
-```
+ ```
 
  >1、createELement（$message)
      >>首先createELement("div")，div内添加如下代码，后添加到body中
+
      ```html
      this.HTMLCODE = `<i style = "margin-right: 5px">${this.icon}</i>//icon为图标
      <p class="el-message__content">
@@ -85,7 +85,9 @@ window.message = _message;
 >2、top同步完成后，移除className，并removeChild(this.message)
 
 >3、如果 ** is_show_close = true ** 时
+
      点击关闭按钮 --> 关闭setTimeout --> top同步上升
+
      ```js
      let messageBoxs = document.querySelectorAll(this.str);//获取所有el-message节点
 	let preMessageBoxs = [];
