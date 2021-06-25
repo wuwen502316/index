@@ -6,15 +6,6 @@ class Notify extends Message {
 	constructor(options) {
 		super(options, "notify");
 	}
-	// init_data() {
-	// 	if (this.type) {
-	// 		this.className = `el-notification right`;
-	// 		if (this.is_center) {
-	// 			this.className = `el-message el-message--${this.type} is-center`;
-	// 		}
-	// 	}
-	// 	this.create_element();
-	// }
 	init(){
 		this.HTMLCODE =  `<i style = "margin-right: 5px">${this.icon}</i>
 			<div class="el-notification__group">
@@ -24,7 +15,8 @@ class Notify extends Message {
 				</div>
 				<div class="el-notification__closeBtn"></div>
 			</div>
-			<i class="el-message__closeBtn" style= "display:${this.is_show_close?'inline-block':'none'}">${icon.close}</i>`
+			${this.is_show_close?`<i class="el-message__closeBtn">${icon.close}</i>`:`<!---->`}
+			`
 		this.init_data();
 	}
 	setInfoStyle(){
@@ -40,6 +32,7 @@ class Notify extends Message {
 		this.messageBox.setAttribute("role","alert")
 		this.messageBox.innerHTML = this.HTMLCODE;
 		document.querySelector("body").appendChild(this.messageBox);
+		this.closeBtn = this.messageBox.querySelector(".el-message__closeBtn");
 		console.log("创建完成");
 		this.setInfoStyle(); //设置mwssagebox的top
 		this.setTimer(); //设置定时器，3s后消失，同时后面的messagebox同步上升

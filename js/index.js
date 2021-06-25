@@ -2,7 +2,7 @@
 window.onload = function(){
 	// console.log(window === this);
 	window.is_show_close = true;
-	let elMessageCancle = document.querySelectorAll(".el-message-cancle");
+	let handleCancel = document.querySelectorAll(".handle-cancel");
 	let elBtnChange = document.querySelector(".el-btn-change");
 	let elBtnChangeSpan = document.querySelector(".el-btn-change>span");
 	let showCloseDiv = document.querySelector(".is-showClose");
@@ -37,7 +37,8 @@ window.onload = function(){
 						this.$message({
 							type:type,
 							message: message,
-							is_show_close:window.is_show_close
+							is_show_close:window.is_show_close,
+							duration:3000
 						})
 					}else{
 						this.$notify({
@@ -52,8 +53,8 @@ window.onload = function(){
 			}
 		}
 	}())
-	for (let i = 0; i < elMessageCancle.length; i++) {
-		elMessageCancle[i].onclick = () => {
+	for (let i = 0; i < handleCancel.length; i++) {
+		handleCancel[i].onclick = () => {
 			// console.log(this.$notify)
 			let el_message_box_wapper = document.querySelectorAll(".el-message-box__wrapper");
 			if(el_message_box_wapper && el_message_box_wapper.length <= 1){
