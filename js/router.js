@@ -18,7 +18,6 @@
   1：初始化 Router.init()
   2：跳转  onclick='linkTo(\"#/list\")'
 */
-
 (function() {
     var util = {
         //获取路由的路径和详细参数
