@@ -68,6 +68,21 @@ window.onload = function(){
 		}
 	}
 	
+	var config = {
+		routerViewId: "app", // 路由切换的挂载点 id
+		stackPages: true, // 多级页面缓存
+		animationName: "slide", // 多级页面缓存
+		routes: [
+		    {
+		      path: "/home",
+		      name: "home",
+		      callback: function(transition) {
+		          home()
+		      }
+		    }
+		]
+	}
+	router.init(config);
 }
 
 
