@@ -65,4 +65,4 @@ let confirm = function(config){
 	})
 	return P;
 }
-export {confirm,Confirm}
+export {confirm}
