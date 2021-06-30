@@ -2,44 +2,58 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="icon" href="./img/icon.ico"/>
+		<link rel="icon" href="./img/icon.ico" />
 		<title>原生js实现elementUI</title>
+		<link rel="stylesheet" type="text/css" href="./css/pbulic.css"/>
 		<link rel="stylesheet" type="text/css" href="./css/element.css" />
 		<link rel="stylesheet" type="text/css" href="./css/index.css">
 		<link rel="stylesheet" type="text/css" href="./css/button.css">
 	</head>
 	<body>
-		<div class="el-message-box__wrapper" role="dilong" style="display: ;">
-			<div class="el-message-box" style="">
-				<div class="el-message-box__header">
-					<div class="el-message-box__title">title</div>
-					<div class="el-message-box__headerbtn el-message-cancle">X</div>
-				</div>
-				<div class="el-message-box__content">content</div>
-				<div class="el-message-box__btns">
-					<button type="button" class="el-button el-button--default el-button--small handle-cancel">
-						<span>取消</span>
-					</button>
-					<button type="button" class="el-button el-button--small el-button--primary btn-sure">
-						<span>确定</span>
-					</button>
+		<div id="app">
+			<div class="el-container">
+				<div class="el-aside" style="width: 200px;border-right:1px #000000 solid;">aside</div>
+				<div class="el-container is-vertical">
+					<div class="el-header flexd-height is-center-parent">
+						<span class="is-center-child">header</span>
+					</div>
+					<div class="el-main is-center-parent"  style="border-top:1px #000000 solid;border-bottom:1px #000000 solid;">
+						<div class="btn">
+							<button rtype="info" class="btn_type el-button--info el-button">
+								<span>消息</span>
+							</button>
+							<button rtype="error" class="btn_type el-button--error el-button">
+								<span>错误</span>
+							</button>
+							<button rtype="success" class="btn_type el-button--success el-button">
+								<span>成功</span>
+							</button>
+							<button rtype="warning" class="btn_type el-button--warning el-button">
+								<span>警告</span>
+							</button>
+							<button rtype="danger" class="el-button--default el-button is-showClose">
+								<span>可关闭</span>
+							</button>
+							<button rtype="danger" class="el-btn-change el-button">
+								<span>message</span>
+							</button>
+							<button rtype="danger"class="el-btn-change el-button">
+								<span>dialog</span>
+							</button>
+						</div>
+					</div>
+					<div class="el-footer flexd-height is-center-parent">
+						<span class="is-center-child">footer</span>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="btn">
-			<button rtype="info" class="btn_type el-button--info el-button"><span>消息</span></button>
-			<button rtype="error" class="btn_type el-button--error el-button"><span>错误</span></button>
-			<button rtype="success" class="btn_type el-button--success el-button"><span>成功</span></button>
-			<button rtype="warning" class="btn_type el-button--warning el-button"><span>警告</span></button>
-			<button rtype="danger" class="el-button--default el-button is-showClose" ><span>可关闭</span></button>
-			<button rtype="danger" class="el-btn-change el-button--default el-button"><span>message</span></button>
 		</div>
 	</body>
 </html>
 <script src="./js/module/api.js" type="module"></script>
 <!-- <script type="module" src="./js/module/api.js"></script> -->
 <script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/router.js"></script>
+<script src="./js/route.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 	// var r = 0;
 	// let a = new Promise((res, reject) => {
