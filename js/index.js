@@ -17,10 +17,10 @@ window.onload = function(){
 		this.is_show_close = !this.is_show_close;
 	}
 	(function btnClick(){
-		let btn_types = document.querySelectorAll(".btn_type");
-		for (let i = 0; i < btn_types.length; i++) {
-			if(btn_types[i].className.indexOf("is-disabled") <= -1){
-				btn_types[i].onclick = e=>{
+		let btns = document.querySelectorAll(".btns-conllection >.el-button");
+		for (let i = 0; i < btns.length; i++) {
+			if(btns[i].className.indexOf("is-disabled") <= -1 && btns[i].getAttribute("role") === "btn"){
+				btns[i].onclick = e=>{
 					let type = null;
 					let message = null;
 					let el = e;
@@ -48,7 +48,6 @@ window.onload = function(){
 							is_show_close:window.is_show_close
 						})
 					}
-					
 				}
 			}
 		}
@@ -67,6 +66,41 @@ window.onload = function(){
 			})
 		}
 	}
+	(function aside(){//则边栏click事件
+		const submenuTitle = document.querySelectorAll(".el-submenu__title");
+		for (let i = 0; i < submenuTitle.length; i++) {
+			submenuTitle[i].onclick = function(e) {
+				let el = e.currentTarget.parentNode;
+				let flag = el.querySelector(".el-submenu__title").getAttribute("aria-expanded");
+				if(el.className.includes("el-submenu") && !el.className.includes("is-disabled") && !flag){
+					let menu_inline = el.querySelector(".el-menu.el-menu--inline");
+					el.querySelector(".el-submenu__title").setAttribute("aria-expanded",true);
+					if(menu_inline){
+						menu_inline.style.display = !flag ? "block" : "none";
+					}
+					let svg = el.querySelector("div .arrow-roll-begin");
+					svg.classList.remove("arrow-roll-begin")
+					svg.classList.add("arrow-roll-click");
+					el.classList.add("is-opened");
+					el.classList.add("el-submenu-transform");
+				}else if(flag){
+					el.querySelector(".el-submenu__title").removeAttribute("aria-expanded");
+					let svg = el.querySelector("div .arrow-roll-click");
+					svg.classList.remove("arrow-roll-click")
+					svg.classList.add("arrow-roll-begin");
+					el.classList.remove("is-opened")
+					el.classList.remove("arrow-roll-click")
+					el.classList.remove("el-submenu-transform")
+					let menu_inline = el.querySelector(".el-menu.el-menu--inline");
+					if(menu_inline){
+						menu_inline.style.display = !flag ? "block" : "none";
+					}
+					
+				}
+				e.stopPropagation();
+			}
+		}
+	}())
 }
 
 

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 	<head>
 		<meta charset="utf-8">
 		<link rel="icon" href="./img/icon.ico" />
 		<title>原生js实现elementUI</title>
-		<link rel="stylesheet" type="text/css" href="./css/pbulic.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/pbulic.css" />
 		<link rel="stylesheet" type="text/css" href="./css/element.css" />
 		<link rel="stylesheet" type="text/css" href="./css/index.css">
 		<link rel="stylesheet" type="text/css" href="./css/button.css">
@@ -12,36 +12,39 @@
 	<body>
 		<div id="app">
 			<div class="el-container">
-				<div class="el-aside" style="width: 200px;border-right:1px #000000 solid;">aside</div>
+				<aside class="el-aside aside">
+					<div class="navMenu" style="height: 100%;width: 100%;"></div>
+				</aside>
 				<div class="el-container is-vertical">
 					<div class="el-header flexd-height is-center-parent">
 						<span class="is-center-child">header</span>
 					</div>
-					<div class="el-main is-center-parent"  style="border-top:1px #000000 solid;border-bottom:1px #000000 solid;">
-						<div class="btn">
-							<button rtype="info" class="btn_type el-button--info el-button">
+					<main class="el-main is-center-parent"
+						style="border-top:1px #000000 solid;border-bottom:1px #000000 solid;">
+						<div class="btns-conllection">
+							<button rtype="info" role="btn" class="btn_type el-button--info el-button">
 								<span>消息</span>
 							</button>
-							<button rtype="error" class="btn_type el-button--error el-button">
+							<button rtype="error" role="btn" class="btn_type el-button--error el-button">
 								<span>错误</span>
 							</button>
-							<button rtype="success" class="btn_type el-button--success el-button">
+							<button rtype="success" role="btn" class="btn_type el-button--success el-button">
 								<span>成功</span>
 							</button>
-							<button rtype="warning" class="btn_type el-button--warning el-button">
+							<button rtype="warning" role="btn" class="btn_type el-button--warning el-button">
 								<span>警告</span>
 							</button>
-							<button rtype="danger" class="el-button--default el-button is-showClose">
+							<button rtype="danger" role="change" class="el-button--default el-button is-showClose">
 								<span>可关闭</span>
 							</button>
-							<button rtype="danger" class="el-btn-change el-button">
+							<button rtype="danger" role="change" class="el-btn-change el-button">
 								<span>message</span>
 							</button>
-							<button rtype="danger"class="el-btn-change el-button">
+							<button role="confirm" class="el-button">
 								<span>dialog</span>
 							</button>
 						</div>
-					</div>
+					</main>
 					<div class="el-footer flexd-height is-center-parent">
 						<span class="is-center-child">footer</span>
 					</div>
@@ -55,6 +58,11 @@
 <script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/route.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+// window.onload=function(){
+	
+// }
+	
+
 	// var r = 0;
 	// let a = new Promise((res, reject) => {
 	// 	console.log(12121);

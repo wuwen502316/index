@@ -2137,7 +2137,7 @@
 }
 
 .el-date-table td.next-month,
-.el-date-table td.prev-month {
+.el-date-table td.pre--month {
 	color: #c0c4cc
 }
 

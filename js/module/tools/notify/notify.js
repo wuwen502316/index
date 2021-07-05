@@ -15,7 +15,7 @@ class Notify extends Message {
 				</div>
 				<div class="el-notification__closeBtn"></div>
 			</div>
-			${this.is_show_close?`<i class="el-message__closeBtn">${icon.close}</i>`:`<!---->`}
+			${this.is_show_close?`<i class="el-message__closeBtn">${icon.close("12px")}</i>`:`<!---->`}
 			`
 		this.init_data();
 	}

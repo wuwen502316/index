@@ -14,7 +14,7 @@ let Message = class Message {
 		this.name = name || "message";
 		this.className = null;
 		this.messageBox = null;
-		this.icon = icon[this.type];
+		this.icon = icon[this.type]("20px");
 		if(typeof(this.duration) !== "number"){
 			throw new Error("duration不为number类型")
 		}else if(this.duration > 0 && this.duration < 3000){
@@ -26,13 +26,13 @@ let Message = class Message {
 		if (flag && this.state === this.name) this.init();
 	}
 	init() {
-		this.HTMLCODE = `<i style = "margin-right: 5px">${this.icon}</i>
+		this.HTMLCODE = `<i style = "margin-right: 5px" class="icon-${this.type}">${this.icon}</i>
 			<p class="el-message__content">
 				<font style="vertical-align: inherit;">
 					<font style="vertical-align: inherit;">${this.message}</font>
 				</font>
 			</p>
-			${this.is_show_close?`<i class="el-message__closeBtn">${icon.close}</i>`:`<!---->`}
+			${this.is_show_close?`<i class="el-message__closeBtn">${icon.close("8px")}</i>`:`<!---->`}
 			`;
 		this.init_data();
 	}
