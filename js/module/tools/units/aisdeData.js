@@ -56,12 +56,29 @@ const asideData = {
 					"navName":"选项2",
 					"classNav":3,
 				}]
+			},{
+				"navName":"分组三",
+				"classNav":2,
 			}]
 		},{
 			"navName":"导航三",//导航栏title
 			"icon":"user",
 			"disabeld":"false",
-			"classNav":1
+			"classNav":1,
+			"childrens":[{//一级子栏
+				// "navName":"分组一",
+				"classNav":2,
+				"childrens":[{
+					"navName":"选项1",
+					"classNav":3,
+				},{
+					"navName":"选项2",
+					"classNav":3,
+				},{
+					"navName":"选项3",
+					"classNav":3,
+				}]
+			}]
 		},{
 			"navName":"导航四",//导航栏title
 			"icon":"home",

@@ -14,6 +14,11 @@ let Message = class Message {
 		this.name = name || "message";
 		this.className = null;
 		this.messageBox = null;
+		if(icon[this.type]){
+			this.type = this.type;
+		}else{
+			this.type = "info"
+		}
 		this.icon = icon[this.type]("20px");
 		if(typeof(this.duration) !== "number"){
 			throw new Error("duration不为number类型")
