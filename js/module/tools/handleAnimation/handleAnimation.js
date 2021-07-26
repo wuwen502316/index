@@ -17,6 +17,7 @@ function HandleAnimation(options){
 	}
 	this.url = null;
 	this.myRules = document.styleSheets;
+	this.flag = false;//默认不存在该条rule即cssKeyFrams.findRule的返回值为null(res)
 }
 
 HandleAnimation.prototype = {
@@ -28,6 +29,8 @@ HandleAnimation.prototype = {
 				let rulesitem = this.myRules[i].cssRules;
 				for (let j = 0; j < rulesitem.length; j++) {
 					if(rulesitem[j].type===7&&rulesitem[j].name===this.animationName){
+						let res = rulesitem[j].findRule(this.ruleName);
+						this.flag = Boolean(res);
 						if(callBack){
 							callBack(rulesitem[j]);
 						}
@@ -36,24 +39,30 @@ HandleAnimation.prototype = {
 			}
 		}
 	},
-	addAnimation(cb){
-		if(this.rule){
-			this.pbulicAnimation((data)=>{
-				data.appendRule(this.rule);
-				if(cb){
-					cb(data);
+	addAnimation(callBack){
+		this.pbulicAnimation((data)=>{
+			if(this.rule){
+				if(!this.flag){
+					data.appendRule(this.rule);
+					// console.log(1)
+				}
+				if(callBack){
+					// console.log(2)
+					callBack(data);
 				}
 				return true;
-			})
-		}
+			}
+		})
 	},
-	removeAnimation(cb){
-		if(this.deleteKeyFrame){
+	removeAnimation(callBack){
+		if(this.ruleName){
 			this.pbulicAnimation((data)=>{
-				data.deleteRule(this.deleteKeyFrame);
-				console.log(data,this.deleteKeyFrame)
-				if(cb){
-					cb(data);
+				if(this.flag){
+					data.deleteRule(this.ruleName);
+				}
+				// console.log(data,this.deleteKeyFrame)
+				if(callBack){
+					callBack(data);
 				}
 				return true;
 			})
@@ -65,66 +74,6 @@ HandleAnimation.prototype = {
 		})
 	}
 }
-
-// let HandleAnimation = class HandleAnimation{
-// 	constructor(options){
-// 		for(let k in options){
-// 			if(!options.hasOwnProperty(k)){
-// 				break;
-// 			}
-// 			this[k] = options[k];
-// 		}
-// 		this.url = null;
-// 		this.myRules = document.styleSheets;
-// 		this.init();
-// 	}
-// 	init(){
-// 		// 判断是否有fileName
-// 		if(this.fileName){
-// 			this.url = cssBaseUrl+this.cssfileName;
-// 			this.addAnimation();
-// 		}else{
-// 			this.addAnimation();
-// 		}
-// 	}
-// 	pbulicAnimation(callBack){
-// 		const len = this.myRules.length;
-// 		for(let i=0; i<len; i++){//对所有的styleSheets
-// 			// console.log(this.myRules[i].href.includes("element.css"),this.myRules[i].href)
-// 			if(!this.myRules[i].href.includes("element.css")){
-// 				let rulesitem = this.myRules[i].cssRules;
-// 				for (let j = 0; j < rulesitem.length; j++) {
-// 					if(rulesitem[j].type===7&&rulesitem[j].name===this.animationName){
-// 						if(callBack){
-// 							callBack(rulesitem[j]);
-// 						}
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// 	addAnimation(cb){
-// 		if(this.rule){
-// 			this.pbulicAnimation((data)=>{
-// 				data.appendRule(this.rule);
-// 				if(cb){
-// 					cb(data);
-// 				}
-// 			})
-// 		}
-// 	}
-// 	removeAnimation(cb){
-// 		if(this.deleteKeyFrame){
-// 			this.pbulicAnimation((data)=>{
-// 				data.deleteRule(this.deleteKeyFrame);
-// 				if(cb){
-// 					cb(data);
-// 				}
-// 			})
-// 		}
-// 	}
-// }
-
 
 let handleAnimation = (options)=>{
 	return new HandleAnimation(options);

@@ -139,10 +139,10 @@ for (let i = 0; i < handleCancel.length; i++) {
 		submenuTitle[i].onclick = function(e) {k++;
 			let el = e.currentTarget.parentNode;//li 获取绑定click事件的dom节点(不同于e.target)
 			let flag = el.querySelector(".el-submenu__title").getAttribute("aria-expanded");
-			console.log(flag)
+			// console.log(flag)
 			//当前节点下获取目标节点的属性
 			if(el.className.includes("el-submenu")&&!el.className.includes("is-disabled")&&!flag){
-				console.log(1)
+				// console.log(1)
 				//判断li的className是否符合要求,并且li>div没有"aria-expanded"属性
 				let menu_inline = el.querySelector(".el-menu.el-menu--inline");//li>div>ul
 				el.querySelector(".el-submenu__title").setAttribute("aria-expanded",true);
@@ -150,7 +150,8 @@ for (let i = 0; i < handleCancel.length; i++) {
 				if(menu_inline){
 					tools.handleAnimation({
 						animationName:"menu-item-fade-out",
-						rule:"to{height:260px;opacity:1;}"
+						rule:"to{height:260px;opacity:1;}",
+						ruleName:"to"
 					}).addAnimation(()=>{//回调
 						menu_inline.classList.add("aside-menu-fade-out");
 						menu_inline.style = ""
@@ -158,8 +159,7 @@ for (let i = 0; i < handleCancel.length; i++) {
 					
 					menu_inline.addEventListener("animationend",()=>{//监听动画是否完成
 						menu_inline.classList.remove("aside-menu-fade-out");
-					}
-						
+						menu_inline.style = ""
 					},false)
 				}
 				
@@ -167,7 +167,7 @@ for (let i = 0; i < handleCancel.length; i++) {
 				tools.handleClass.replaceClass(svg,"arrow-roll-begining","arrow-roll-clicked");
 				tools.handleClass.addClass(el,"is-opened el-submenu-transform");//li添加className
 			}else if(flag){
-				console.log(2)
+				// console.log(2)
 				el.querySelector(".el-submenu__title").removeAttribute("aria-expanded");
 				//li折叠时移除"aria-expanded"属性即表示不是展开状态
 				let svg = el.querySelector("div .arrow-roll-clicked");
@@ -177,7 +177,8 @@ for (let i = 0; i < handleCancel.length; i++) {
 				if(menu_inline){
 					tools.handleAnimation({
 						rule:"0%{height:210px;opacity:1;}",
-						animationName:"menu-item-fade-in"
+						animationName:"menu-item-fade-in",
+						ruleName:"from"
 					}).addAnimation(()=>{
 						menu_inline.classList.add('aside-menu-fade-in')
 					})
