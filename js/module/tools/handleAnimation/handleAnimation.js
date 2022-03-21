@@ -18,7 +18,7 @@ function HandleAnimation(options){
 	this.url = null;
 	this.myRules = document.styleSheets;
 	this.flag = false;//默认不存在该条rule即cssKeyFrams.findRule的返回值为null(res)
-	if(this.rule && this.animationName){
+	if(!this.rule && !this.animationName){
 		console.err(`参数错误<br></br>animationName:${animationName};rule:${rule}`);
 		return;
 	}
