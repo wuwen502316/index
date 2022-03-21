@@ -9,6 +9,9 @@
 let cssBaseUrl = window.location.origin;
 
 function HandleAnimation(options){
+	this.rule = null;
+	this.ruleName = null;
+	this.animationName = null;
 	for(let k in options){
 		if(!options.hasOwnProperty(k)){
 			break;
